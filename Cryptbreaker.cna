@@ -47,7 +47,6 @@ import java.nio.charset.StandardCharsets;
 %cryptbreakerAttributes["submitted_crack_jobs"] = @();
 %cryptbreakerAttributes["crack_jobs"] = @();
 %cryptbreakerAttributes["hashes"] = @();
-%cryptbreakerAttributes["submitted_hashes"] = @();
 
 global('%cryptbreakerserverSettings %cryptbreakerAttributes $select_bool $jobssmenu_dialog $notification_dialog $credsToSend');
 
@@ -501,8 +500,7 @@ sub sendHashesToCryptbreaker {
             [$pwdumpLine append: "$cred['user']"];
         }
         [$pwdumpLine append: "::".$cred['password'].":".$cred['password'].":::"];
-        if(strlen($cred['password']) == 32  && ("cryptbreaker" !isin $cred['source'])  && ($cred['password'] !isin $cryptbreakerAttributes["submitted_hashes"])){
-            push($cryptbreakerAttributes["submitted_hashes"], $cred['password']);
+        if(strlen($cred['password']) == 32  && ("cryptbreaker" !isin $cred['source'])  && ($cred['password'])){
             push($credsToSend, $pwdumpLine);
         }
     }

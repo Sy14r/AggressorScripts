@@ -365,6 +365,14 @@ sub jobsMenu {
                 }
                 [$brIn close];
                 #println($results);
+                $splitLine = split("\n",$results);
+                if(size($splitLine) <= 2){
+                    foreach $line ($splitLine){
+                        if(strlen($line) > 0){
+                            $results = replace(replace(replace(replace($line,"\",\"","\",\n\""),"\],\"","\],\n\""),"\\{\"","\\{\n\""),"\\}","\n\\}");                    
+                        }
+                    }
+                }
                 # adding cracked passwords
                 local('$data $plaintext');
                 foreach $line (split("\n",$results)){
